@@ -22,3 +22,8 @@ Type the word you want to translate:
 You chose "fr" as the language to translate "hello" to.
 We don't really need this output to appear at the end. However, aside from keeping the user informed, it does something else: it's showing us if the arguments were successfully accepted by the function. Keep it in mind while proceeding from stage to stage!
 """
+
+translate = input('Type "en" if you want to translate from French into English, '
+               'or "fr" if you want to translate from English into French:\n')
+word = input('Type the word you want to translate:\n')
+print(f'You chose "{translate}" as the language to translate "{word}" to.')
