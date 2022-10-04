@@ -26,4 +26,4 @@ We don't really need this output to appear at the end. However, aside from keepi
 translate = input('Type "en" if you want to translate from French into English, '
                'or "fr" if you want to translate from English into French:\n')
 word = input('Type the word you want to translate:\n')
-print(f'You chose "{translate}" as the language to translate "{word}" to.')
+print(f'You chose "{translate}" as the language to translate "{word}".')
