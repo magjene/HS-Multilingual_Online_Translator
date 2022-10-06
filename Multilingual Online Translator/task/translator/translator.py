@@ -84,27 +84,28 @@ from bs4 import BeautifulSoup
 
 
 translate = input('Type "en" if you want to translate from French into English, '
-               'or "fr" if you want to translate from English into French:\n')
+                  'or "fr" if you want to translate from English into French:\n')
 word = input('Type the word you want to translate:\n')
 print(f'You chose "{translate}" as the language to translate "{word}".')
 
 address = rf'https://context.reverso.net/translation/'
 if translate == 'fr':
-    # address += r'english-french/' + f'{word}'
-    address += r'english-russian/' + f'{word}'
+    address += r'english-french/' + f'{word}'
 elif translate == 'en':
     address += r'french-english/' + f'{word}'
 
-print('address', address)
-
 r = requests.get(address, headers={'User-Agent': 'Mozilla/5.0'})
-
 if r:
     print(r.status_code, 'OK')
 else:
     print(r.status_code, 'Fail')
 
+out = []
 soup = BeautifulSoup(r.content, 'html.parser')
 display_term = soup.find_all('span', {'class': 'display-term'})
 for trans in display_term:
-    print(trans.text)
+    out.append(trans.text)
+
+out.pop()
+print('Translations')
+print(out)
