@@ -80,6 +80,7 @@ Here you can see the results that are almost readable, but there are a lot of qu
 
 
 import requests
+from bs4 import BeautifulSoup
 
 
 translate = input('Type "en" if you want to translate from French into English, '
@@ -89,15 +90,21 @@ print(f'You chose "{translate}" as the language to translate "{word}".')
 
 address = rf'https://context.reverso.net/translation/'
 if translate == 'fr':
-    address += r'english-french/' + f'{word}'
+    # address += r'english-french/' + f'{word}'
+    address += r'english-russian/' + f'{word}'
 elif translate == 'en':
     address += r'french-english/' + f'{word}'
 
 print('address', address)
 
 r = requests.get(address, headers={'User-Agent': 'Mozilla/5.0'})
-print(r.status_code)
+
 if r:
-    print('Success!')
+    print(r.status_code, 'OK')
 else:
-    print('Fail')
+    print(r.status_code, 'Fail')
+
+soup = BeautifulSoup(r.content, 'html.parser')
+display_term = soup.find_all('span', {'class': 'display-term'})
+for trans in display_term:
+    print(trans.text)
