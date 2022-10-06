@@ -78,7 +78,26 @@ Translations
 Here you can see the results that are almost readable, but there are a lot of quotes and commas. The next stage is all about the representation!
 """
 
+
+import requests
+
+
 translate = input('Type "en" if you want to translate from French into English, '
                'or "fr" if you want to translate from English into French:\n')
 word = input('Type the word you want to translate:\n')
 print(f'You chose "{translate}" as the language to translate "{word}".')
+
+address = rf'https://context.reverso.net/translation/'
+if translate == 'fr':
+    address += r'english-french/' + f'{word}'
+elif translate == 'en':
+    address += r'french-english/' + f'{word}'
+
+print('address', address)
+
+r = requests.get(address, headers={'User-Agent': 'Mozilla/5.0'})
+print(r.status_code)
+if r:
+    print('Success!')
+else:
+    print('Fail')
