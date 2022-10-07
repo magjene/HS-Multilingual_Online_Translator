@@ -94,26 +94,23 @@ if translate == 'fr':
 elif translate == 'en':
     address += r'french-english/' + f'{word}'
 
+out_words, out_texts = [], []
 r = requests.get(address, headers={'User-Agent': 'Mozilla/5.0'})
 if r:
     print(r.status_code, 'OK')
+
+    soup = BeautifulSoup(r.content, 'html.parser')
+    display_term = soup.find_all('span', {'class': 'display-term'})
+    for trans in display_term:
+        out_words.append(trans.text)
+
+    display_term = soup.find('section', {'id': 'examples-content'})
+    display_term = display_term.find_all('span', {'class': 'text'})
+    for t in display_term:
+        out_texts.append(t.text.strip())
+
+    print('Translations')
+    print(out_words[:-1])
+    print(out_texts)
 else:
     print(r.status_code, 'Fail')
-
-out_words = []
-soup = BeautifulSoup(r.content, 'html.parser')
-display_term = soup.find_all('span', {'class': 'display-term'})
-for trans in display_term:
-    out_words.append(trans.text)
-
-out_words.pop()
-print('Translations')
-print(out_words)
-
-out_texts = []
-display_term = soup.find('section', {'id': 'examples-content'})
-display_term = display_term.find_all('span', {'class': 'text'})
-for t in display_term:
-    out_texts.append(t.text.strip())
-
-print(out_texts)
