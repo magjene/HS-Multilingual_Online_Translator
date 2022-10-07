@@ -193,12 +193,12 @@ elif address_1 == '0':
         for key, val in trans_lang.items():
             if key != address_0:
                 net(address_0, key, word, 1)
-                file.write(f'{val} Translations:')
-                file.write(f'{out_words[0]}')
-                file.write('')
-                file.write(f'{val} Examples:')
-                file.write(f'{out_texts[0]}')
-                file.write(f'{out_texts[1]}')
-                file.write('')
+                file.write(f'{val} Translations:\n')
+                file.write(f'{out_words[0]}\n')
+                file.write('\n')
+                file.write(f'{val} Examples:\n')
+                file.write(f'{out_texts[0]}\n')
+                file.write(f'{out_texts[1]}\n')
+                file.write('\n')
 else:
     ...
