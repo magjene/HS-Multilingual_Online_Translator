@@ -104,9 +104,8 @@ if r:
     for trans in display_term:
         out_words.append(trans.text)
 
-    display_term = soup.find('section', {'id': 'examples-content'})
-    display_term = display_term.find_all('span', {'class': 'text'})
-    for t in display_term:
+    display_texts = soup.find('section', {'id': 'examples-content'}).find_all('span', {'class': 'text'})
+    for t in display_texts:
         out_texts.append(t.text.strip())
 
     print('Translations')
