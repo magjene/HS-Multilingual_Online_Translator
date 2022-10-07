@@ -86,6 +86,10 @@ if r:
     print()
 
     print(f'{name} Examples:')
-    print(out_texts)
+    for i, t in enumerate(out_texts):
+        if i == 10:
+            break
+        p = '' if i % 2 == 0 else '\n'
+        print(t + f'{p}')
 else:
     print(r.status_code, 'Fail')
