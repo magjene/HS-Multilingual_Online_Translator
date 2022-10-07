@@ -139,13 +139,14 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def net(ad0, ad1, w):
+def net(ad0, ad1, w, j=5):
     address = rf'https://context.reverso.net/translation/' + trans_lang[ad0].lower() + '-' \
               + trans_lang[ad1].lower() + '/' + w
     out_words, out_texts = [], []
     r = requests.get(address, headers={'User-Agent': 'Mozilla/5.0'})
     if r:
         soup = BeautifulSoup(r.content, 'html.parser')
+
         display_term = soup.find_all('span', {'class': 'display-term'})
         for trans in display_term:
             out_words.append(trans.text)
@@ -155,12 +156,12 @@ def net(ad0, ad1, w):
             out_texts.append(t.text.strip())
 
         print(f'{trans_lang[ad1].title()} Translations:')
-        print(*[w for i, w in enumerate(out_words[:-1]) if i < 5], sep='\n')
+        print(*[w for i, w in enumerate(out_words[:-1]) if i < j and i < len(out_words) // 2], sep='\n')
 
         print()
 
         print(f'{trans_lang[ad1].title()} Examples:')
-        print(*[out_texts[i * 2] + '\n' + out_texts[i * 2 + 1] + '\n' for i in range(5) if i < len(out_texts) // 2],
+        print(*[out_texts[i * 2] + '\n' + out_texts[i * 2 + 1] + '\n' for i in range(j) if i < len(out_texts) // 2],
               sep='\n')
     else:
         print(r.status_code, 'Fail')
@@ -186,6 +187,8 @@ print()
 if address_1 in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']:
     net(address_0, address_1, word)
 elif address_1 == '0':
-    ...
+    for key in trans_lang.keys():
+        if key != address_0:
+            net(address_0, key, word, 1)
 else:
     ...
