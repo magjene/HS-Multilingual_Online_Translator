@@ -81,8 +81,11 @@ if r:
 
     name = 'French' if translate == 'fr' else 'English'
     print(f'{name} Translations:')
-    print(out_words[:-1])
+    for w in out_words[:-1]:
+        print(w)
+
     print()
+
     print(f'{name} Examples:')
     print(out_texts)
 else:
