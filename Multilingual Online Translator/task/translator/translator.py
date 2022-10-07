@@ -100,12 +100,20 @@ if r:
 else:
     print(r.status_code, 'Fail')
 
-out = []
+out_words = []
 soup = BeautifulSoup(r.content, 'html.parser')
 display_term = soup.find_all('span', {'class': 'display-term'})
 for trans in display_term:
-    out.append(trans.text)
+    out_words.append(trans.text)
 
-out.pop()
+out_words.pop()
 print('Translations')
-print(out)
+print(out_words)
+
+out_texts = []
+display_term = soup.find('section', {'id': 'examples-content'})
+display_term = display_term.find_all('span', {'class': 'text'})
+for t in display_term:
+    out_texts.append(t.text.strip())
+
+print(out_texts)
