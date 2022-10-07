@@ -138,6 +138,9 @@ files:
     if __name__ == '__main__':
         TranslatorTest('translator.translator').run_tests()
   learner_created: false
+- name: translator/s_91860D8CA78B45DEE66EF32279A68E06A5423FF9541F0C8DB4A5138915C378CC_1574232106854_2019-11-20_11-41.png
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/8973#comment
 status: Unchecked
 record: -1
