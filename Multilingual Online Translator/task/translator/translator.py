@@ -81,8 +81,7 @@ if r:
 
     name = 'French' if translate == 'fr' else 'English'
     print(f'{name} Translations:')
-    for w in out_words[:-1]:
-        print(w)
+    print(*[w for i, w in enumerate(out_words[:-1]) if i < 5], sep='\n')
 
     print()
 
