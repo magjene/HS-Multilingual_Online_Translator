@@ -89,38 +89,42 @@ import requests
 from bs4 import BeautifulSoup
 
 
-translate = input('Type "en" if you want to translate from French into English, '
-                  'or "fr" if you want to translate from English into French:\n')
-word = input('Type the word you want to translate:\n')
-print(f'You chose "{translate}" as the language to translate "{word}".')
-
 address = rf'https://context.reverso.net/translation/'
-if translate == 'fr':
-    address += r'english-french/' + f'{word}'
-elif translate == 'en':
-    address += r'french-english/' + f'{word}'
+trans_lang = {'1': 'Arabic', '2': 'German', '3': 'English', '4': 'Spanish', '5': 'French', '6': 'Hebrew',
+              '7': 'Japanese', '8': 'Dutch', '9': 'Polish', '10': 'Portuguese', '11': 'Romanian',
+              '12': 'Russian', '13': 'Turkish'}
+print('Hello, welcome to the translator. Translator supports:')
+print(*[key + '. ' + val for key, val in trans_lang.items()], sep='\n')
+print('Type the number of your language: ')
+address += trans_lang[input()].lower() + '-'
+print('Type the number of language you want to translate to:')
+address += trans_lang[input()].lower() + '/'
+print('Type the word you want to translate:')
+address += input().lower()
+print(address)
 
-out_words, out_texts = [], []
-r = requests.get(address, headers={'User-Agent': 'Mozilla/5.0'})
-if r:
-    print(r.status_code, 'OK\n')
 
-    soup = BeautifulSoup(r.content, 'html.parser')
-    display_term = soup.find_all('span', {'class': 'display-term'})
-    for trans in display_term:
-        out_words.append(trans.text)
-
-    display_texts = soup.find('section', {'id': 'examples-content'}).find_all('span', {'class': 'text'})
-    for t in display_texts:
-        out_texts.append(t.text.strip())
-
-    name = 'French' if translate == 'fr' else 'English'
-    print(f'{name} Translations:')
-    print(*[w for i, w in enumerate(out_words[:-1]) if i < 5], sep='\n')
-
-    print()
-
-    print(f'{name} Examples:')
-    print(*[out_texts[i * 2] + '\n' + out_texts[i * 2 + 1] + '\n' for i in range(5) if i < len(out_texts) // 2], sep='\n')
-else:
-    print(r.status_code, 'Fail')
+# out_words, out_texts = [], []
+# r = requests.get(address, headers={'User-Agent': 'Mozilla/5.0'})
+# if r:
+#     print(r.status_code, 'OK\n')
+#
+#     soup = BeautifulSoup(r.content, 'html.parser')
+#     display_term = soup.find_all('span', {'class': 'display-term'})
+#     for trans in display_term:
+#         out_words.append(trans.text)
+#
+#     display_texts = soup.find('section', {'id': 'examples-content'}).find_all('span', {'class': 'text'})
+#     for t in display_texts:
+#         out_texts.append(t.text.strip())
+#
+#     name = 'French' if translate == 'fr' else 'English'
+#     print(f'{name} Translations:')
+#     print(*[w for i, w in enumerate(out_words[:-1]) if i < 5], sep='\n')
+#
+#     print()
+#
+#     print(f'{name} Examples:')
+#     print(*[out_texts[i * 2] + '\n' + out_texts[i * 2 + 1] + '\n' for i in range(5) if i < len(out_texts) // 2], sep='\n')
+# else:
+#     print(r.status_code, 'Fail')
