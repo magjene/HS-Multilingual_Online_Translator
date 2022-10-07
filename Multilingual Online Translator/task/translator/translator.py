@@ -140,6 +140,7 @@ from bs4 import BeautifulSoup
 
 
 def net(ad0, ad1, w, j=5):
+    global out_words, out_texts
     address = rf'https://context.reverso.net/translation/' + trans_lang[ad0].lower() + '-' \
               + trans_lang[ad1].lower() + '/' + w
     out_words, out_texts = [], []
@@ -184,11 +185,20 @@ word = input().lower()
 
 print()
 
+out_words, out_texts = [], []
 if address_1 in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']:
     net(address_0, address_1, word)
 elif address_1 == '0':
-    for key in trans_lang.keys():
-        if key != address_0:
-            net(address_0, key, word, 1)
+    with open(f'{word}.txt', 'w', encoding='utf-8') as file:
+        for key, val in trans_lang.items():
+            if key != address_0:
+                net(address_0, key, word, 1)
+                file.write(f'{val} Translations:')
+                file.write(f'{out_words[0]}')
+                file.write('')
+                file.write(f'{val} Examples:')
+                file.write(f'{out_texts[0]}')
+                file.write(f'{out_texts[1]}')
+                file.write('')
 else:
     ...
