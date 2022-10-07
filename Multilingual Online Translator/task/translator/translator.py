@@ -68,7 +68,7 @@ elif translate == 'en':
 out_words, out_texts = [], []
 r = requests.get(address, headers={'User-Agent': 'Mozilla/5.0'})
 if r:
-    print(r.status_code, 'OK')
+    print(r.status_code, 'OK\n')
 
     soup = BeautifulSoup(r.content, 'html.parser')
     display_term = soup.find_all('span', {'class': 'display-term'})
@@ -79,8 +79,11 @@ if r:
     for t in display_texts:
         out_texts.append(t.text.strip())
 
-    print('Translations')
+    name = 'French' if translate == 'fr' else 'English'
+    print(f'{name} Translations:')
     print(out_words[:-1])
+    print()
+    print(f'{name} Examples:')
     print(out_texts)
 else:
     print(r.status_code, 'Fail')
