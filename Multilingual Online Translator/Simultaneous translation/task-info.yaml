@@ -181,5 +181,25 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/8974#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: "Wrong answer in test #3\n\nLooks like you didn't create a file named <word>.txt\
+    \ \nwhere <word> is the word that should be translated.\n\nPlease find below the\
+    \ output of your program during this failed test.\nNote that the '>' character\
+    \ indicates the beginning of the input line.\n\n---\n\nHello, welcome to the translator.\
+    \ Translator supports:\n1. Arabic\n2. German\n3. English\n4. Spanish\n5. French\n\
+    6. Hebrew\n7. Japanese\n8. Dutch\n9. Polish\n10. Portuguese\n11. Romanian\n12.\
+    \ Russian\n13. Turkish\nType the number of your language: \n> 12\nType the number\
+    \ of a language you want to translate to or '0' to translate to all languages:\n\
+    > 3\nType the word you want to translate:\n> глаза\n\nEnglish Translations:\n\
+    eye\nface\nsight\neyeball\nears\n\nEnglish Examples:\nСначала внешняя поверхно\
+    сть глаза мутнеет и приобретает голубоватый оттенок.\nFirst, the outer surface\
+    \ of the eye becomes turbid and takes on a bluish cast.\n\nДлительность окклюз\
+    ии диктуется динамикой изменения остроты зрения амблиопичного глаза.\nThe duration\
+    \ of occlusion is dictated by the dynamics of change in visual acuity amblyopic\
+    \ eye.\n\nНадеюсь скоро увижу твои счастливые глаза.\nHopefully, I'll see some\
+    \ of your lovely faces soon.\n\nПоэтому глаза водителя не будут напрягаться.\n\
+    As a result, the driver's sight is not impaired.\n\nВыразительны темные живые\
+    \ глаза молодого человека.\nHe searched the dark, thin eyes of the young man."
+  time: Fri, 07 Oct 2022 21:19:31 UTC
 record: -1

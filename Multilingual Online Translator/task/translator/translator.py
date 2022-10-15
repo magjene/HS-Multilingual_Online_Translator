@@ -156,14 +156,16 @@ def net(ad0, ad1, w, j=5):
         for t in display_texts:
             out_texts.append(t.text.strip())
 
-        print(f'{trans_lang[ad1].title()} Translations:')
-        print(*[w for i, w in enumerate(out_words[:-1]) if i < j and i < len(out_words) // 2], sep='\n')
+        with open(f'{w}.txt', 'a', encoding='utf-8') as file:
+            print(f'{trans_lang[ad1].title()} Translations:', file=file)
+            print(*[w for i, w in enumerate(out_words[:-1]) if i < j and i < len(out_words) // 2],
+                  sep='\n', file=file)
 
-        print()
+            print('', file=file)
 
-        print(f'{trans_lang[ad1].title()} Examples:')
-        print(*[out_texts[i * 2] + '\n' + out_texts[i * 2 + 1] + '\n' for i in range(j) if i < len(out_texts) // 2],
-              sep='\n')
+            print(f'{trans_lang[ad1].title()} Examples:', file=file)
+            print(*[out_texts[i * 2] + '\n' + out_texts[i * 2 + 1] + '\n' for i in range(j) if i < len(out_texts) // 2],
+                  sep='\n', file=file)
     else:
         print(r.status_code, 'Fail')
 
@@ -185,20 +187,15 @@ word = input().lower()
 
 print()
 
+open(f'{word}.txt', 'w', encoding='utf-8').close()
 out_words, out_texts = [], []
 if address_1 in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']:
     net(address_0, address_1, word)
 elif address_1 == '0':
-    with open(f'{word}.txt', 'w', encoding='utf-8') as file:
-        for key, val in trans_lang.items():
-            if key != address_0:
-                net(address_0, key, word, 1)
-                file.write(f'{val} Translations:\n')
-                file.write(f'{out_words[0]}\n')
-                file.write('\n')
-                file.write(f'{val} Examples:\n')
-                file.write(f'{out_texts[0]}\n')
-                file.write(f'{out_texts[1]}\n')
-                file.write('\n')
+    for key, val in trans_lang.items():
+        if key != address_0:
+            net(address_0, key, word, j=1)
 else:
     ...
+
+print(open(f'{word}.txt', 'r', encoding='utf-8').read())
