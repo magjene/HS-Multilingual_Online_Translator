@@ -1,43 +1,51 @@
 """
 Project: Multilingual Online Translator
-Stage 5/7: Simultaneous translation
+Stage 6/7: Faster translation
 
 
 Description
-Perfect! Your program already became a convenient tool. There are just a couple of stages left. Your translation app is flexible enough to be appreciated by many people worldwide, so let's make it even better: add the feature of translating the word to all the languages at once, and also save the search results to a text file so that the user could read the translations later.
+Let's try to change the way the user interacts with the program to make the process faster. To make your program more convenient, you can use command-line arguments. They make it possible to provide a program with all the data it needs using a simple command.
 
 Objectives
-Add the following functionality to your program:
+At this stage, your program should:
 
-Before taking an input specifying the target language, output the message Type the number of a language you want to translate to or '0' to translate to all languages:
-If the user inputs 0 as the target language, translate the word to all available languages.
-Output results to the terminal, as in the previous stage. At this stage, it's enough to print just one translation and one sentence pair per target language.
-Save results of the search to a file named word.txt, where word is the word that was being translated.
-Example
+Instead of all inputs, take command-line arguments. The first argument is the name of the source language, the second argument is the name of the target language, the third argument is the word. If the word should be translated to all languages, the second argument will be all.
+The rest of the functionality should remain the same as in the previous stage.
+You'll see some significant changes in the usability of the app!
+
+Examples
 The greater-than symbol followed by a space (> ) represents the user input. Note that it's not part of the input.
 
-Hello, welcome to the translator. Translator supports:
-1. Arabic
-2. German
-3. English
-4. Spanish
-5. French
-6. Hebrew
-7. Japanese
-8. Dutch
-9. Polish
-10. Portuguese
-11. Romanian
-12. Russian
-13. Turkish
-Type the number of your language:
-> 3
-Type the number of a language you want to translate to or '0' to translate to all languages:
-> 0
-Type the word you want to translate:
-> hello
-This will result in the following output and a file called hello.txt with the same content:
+Example 1
 
+You can choose the number of translations and sentence pairs for a language. There should be just at least one translation and one sentence pair.
+
+> python translator.py english french hello
+French Translations:
+bonjour
+allô
+ohé
+coucou
+salut
+
+French Examples:
+Well, hello, freedom fighters.:
+Et bien, bonjour combattants de la liberté.
+
+Goodbye England and hello the Netherlands...:
+Au revoir l'Angleterre et bonjour les Pays-Bas...
+
+Yes, hello. Jackson speaking.:
+Oui, allô, Jackson à l'appareil.
+
+Hello, hello, hello, hello.:
+Allô, allô, allô, allô.
+
+And began appearing hello kitty games online.:
+Et a commencé à apparaître bonjour Kitty jeux en ligne.
+Example 2
+
+> python translator.py english all hello
 Arabic Translations:
 مرحبا
 
