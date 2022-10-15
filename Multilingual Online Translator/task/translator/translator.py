@@ -145,12 +145,13 @@ Velhasıl minik Sabina size selam söylüyor.
 
 import requests
 from bs4 import BeautifulSoup
+import sys
 
 
 def net(ad0, ad1, w, j=5):
     global out_words, out_texts
-    address = rf'https://context.reverso.net/translation/' + trans_lang[ad0].lower() + '-' \
-              + trans_lang[ad1].lower() + '/' + w
+    address = rf'https://context.reverso.net/translation/' + ad0 + '-' \
+              + ad1 + '/' + w
     out_words, out_texts = [], []
     r = requests.get(address, headers={'User-Agent': 'Mozilla/5.0'})
     if r:
@@ -165,44 +166,33 @@ def net(ad0, ad1, w, j=5):
             out_texts.append(t.text.strip())
 
         with open(f'{w}.txt', 'a', encoding='utf-8') as file:
-            print(f'{trans_lang[ad1].title()} Translations:', file=file)
+            print(f'{ad1.title()} Translations:', file=file)
             print(*[w for i, w in enumerate(out_words[:-1]) if i < j and i < len(out_words) // 2],
                   sep='\n', file=file)
 
             print('', file=file)
 
-            print(f'{trans_lang[ad1].title()} Examples:', file=file)
+            print(f'{ad1.title()} Examples:', file=file)
             print(*[out_texts[i * 2] + '\n' + out_texts[i * 2 + 1] + '\n' for i in range(j) if i < len(out_texts) // 2],
                   sep='\n', file=file)
     else:
         print(r.status_code, 'Fail')
 
 
-trans_lang = {'1': 'Arabic', '2': 'German', '3': 'English', '4': 'Spanish', '5': 'French', '6': 'Hebrew',
-              '7': 'Japanese', '8': 'Dutch', '9': 'Polish', '10': 'Portuguese', '11': 'Romanian',
-              '12': 'Russian', '13': 'Turkish'}
+trans_lang = ('arabic', 'german', 'english', 'spanish', 'french', 'hebrew',
+              'japanese', 'dutch', 'polish', 'portuguese', 'romanian',
+              'russian', 'turkish')
 
-print('Hello, welcome to the translator. Translator supports:')
-print(*[key + '. ' + val for key, val in trans_lang.items()], sep='\n')
-print('Type the number of your language: ')
-address_0 = input()
-
-print("Type the number of a language you want to translate to or '0' to translate to all languages:")
-address_1 = input()
-
-print('Type the word you want to translate:')
-word = input().lower()
-
-print()
+address_0, address_1, word = sys.argv[1::]
 
 open(f'{word}.txt', 'w', encoding='utf-8').close()
 out_words, out_texts = [], []
-if address_1 in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']:
+if address_1 == 'all':
+    for val in trans_lang:
+        if val != address_0:
+            net(address_0, val, word, j=1)
+elif address_1 in trans_lang:
     net(address_0, address_1, word)
-elif address_1 == '0':
-    for key, val in trans_lang.items():
-        if key != address_0:
-            net(address_0, key, word, j=1)
 else:
     ...
 
