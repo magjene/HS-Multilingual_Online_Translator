@@ -67,7 +67,8 @@ def net(ad0, ad1, w, j=5):
             print(*[out_texts[i * 2] + '\n' + out_texts[i * 2 + 1] + '\n' for i in range(j) if i < len(out_texts) // 2],
                   sep='\n', file=file)
     else:
-        print(r.status_code, 'Fail')
+        # print(r.status_code, 'Fail')
+        print('Something wrong with your internet connection')
 
 
 trans_lang = ('arabic', 'german', 'english', 'spanish', 'french', 'hebrew',
@@ -78,13 +79,16 @@ address_0, address_1, word = sys.argv[1::]
 
 open(f'{word}.txt', 'w', encoding='utf-8').close()
 out_words, out_texts = [], []
-if address_1 == 'all':
+if address_0 in trans_lang and address_1 in trans_lang:
+    net(address_0, address_1, word)
+elif address_1 == 'all' and address_0 in trans_lang:
     for val in trans_lang:
         if val != address_0:
             net(address_0, val, word, j=1)
-elif address_1 in trans_lang:
-    net(address_0, address_1, word)
 else:
-    ...
+    if address_0 not in trans_lang:
+        print(f"Sorry, the program doesn't support {address_0}")
+    else:
+        print(f"Sorry, the program doesn't support {address_1}")
 
 print(open(f'{word}.txt', 'r', encoding='utf-8').read())
