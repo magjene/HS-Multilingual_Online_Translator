@@ -201,6 +201,16 @@ files:
 - name: translator/crrrrrrrrrrrrrrrrrrrrrrrr.txt
   visible: true
   learner_created: true
+- name: brrrrrrrrrrrrrrrrk.txt
+  visible: true
+  learner_created: true
+- name: hello.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/8976#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Sun, 16 Oct 2022 12:36:52 UTC
 record: -1
