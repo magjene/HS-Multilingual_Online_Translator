@@ -65,10 +65,12 @@ def net(ad0, ad1, w, j=5):
 
             print(f'{ad1.title()} Examples:', file=file)
             print(*[out_texts[i * 2] + '\n' + out_texts[i * 2 + 1] + '\n' for i in range(j) if i < len(out_texts) // 2],
-                  sep='\n', file=file)
+                  sep='\n', file=file, flush=True)
     else:
-        # print(r.status_code, 'Fail')
-        print('Something wrong with your internet connection')
+        if r.status_code == 404:
+            print(f"Sorry, unable to find {w}")
+        else:
+            print('Something wrong with your internet connection')
 
 
 trans_lang = ('arabic', 'german', 'english', 'spanish', 'french', 'hebrew',

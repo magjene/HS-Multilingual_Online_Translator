@@ -189,6 +189,18 @@ files:
 - name: translator/hello.txt
   visible: true
   learner_created: true
+- name: translator/crrrrrrrrrrrrrrrrrrrrrrrrrrr.txt
+  visible: true
+  learner_created: true
+- name: translator/crrrr.txt
+  visible: true
+  learner_created: true
+- name: translator/hell000.txt
+  visible: true
+  learner_created: true
+- name: translator/crrrrrrrrrrrrrrrrrrrrrrrr.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/8976#comment
 status: Unchecked
 record: -1
