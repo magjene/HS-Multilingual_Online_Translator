@@ -1,145 +1,36 @@
 """
 Project: Multilingual Online Translator
-Stage 6/7: Faster translation
+Stage 7/7: Unexpected
 
 
 Description
-Let's try to change the way the user interacts with the program to make the process faster. To make your program more convenient, you can use command-line arguments. They make it possible to provide a program with all the data it needs using a simple command.
+Your program works as expected! However, there’s a problem you should always keep in mind: the user can always input something that will break your program.
+
+Up to this stage, we considered "perfect" inputs. But what if things go wrong? For example, you gave your program to someone who’s not familiar with the concept behind it. What if they try to translate to or from languages different from those you have in your code, or even start typing jabberwocky? Let's find some way to avoid this.
+
+All these situations are called exceptions because you didn’t expect them to happen, and now your program will have to handle them.
 
 Objectives
-At this stage, your program should:
+Add the following functionality:
 
-Instead of all inputs, take command-line arguments. The first argument is the name of the source language, the second argument is the name of the target language, the third argument is the word. If the word should be translated to all languages, the second argument will be all.
-The rest of the functionality should remain the same as in the previous stage.
-You'll see some significant changes in the usability of the app!
-
+If the user inputs a name of a language that isn't available in the program, print the line Sorry, the program doesn't support <language> and quit the program.
+If the connection with the website isn't successful, print the line Something wrong with your internet connection
+If the user inputs a word that's not present in ReversoContext, print the line Sorry, unable to find <word>
 Examples
 The greater-than symbol followed by a space (> ) represents the user input. Note that it's not part of the input.
 
 Example 1
 
-You can choose the number of translations and sentence pairs for a language. There should be just at least one translation and one sentence pair.
-
-> python translator.py english french hello
-French Translations:
-bonjour
-allô
-ohé
-coucou
-salut
-
-French Examples:
-Well, hello, freedom fighters.:
-Et bien, bonjour combattants de la liberté.
-
-Goodbye England and hello the Netherlands...:
-Au revoir l'Angleterre et bonjour les Pays-Bas...
-
-Yes, hello. Jackson speaking.:
-Oui, allô, Jackson à l'appareil.
-
-Hello, hello, hello, hello.:
-Allô, allô, allô, allô.
-
-And began appearing hello kitty games online.:
-Et a commencé à apparaître bonjour Kitty jeux en ligne.
+> python translator.py english korean hello
+Sorry, the program doesn't support korean
 Example 2
 
 > python translator.py english all hello
-Arabic Translations:
-مرحبا
+Something wrong with your internet connection
+Example 3
 
-Arabic Example:
-Well, hello, old-school racist.:
-حسنا، مرحبا يا تلميذة المدرسة العنصريّة - الأمر يسري بدمهم!
-
-
-German Translations:
-hallo
-
-German Example:
-We agreedellen wolf is innocent. hello.:
-Wir waren einverstanden damit, dass Wolf unschuldig ist. Hallo.
-
-
-Spanish Translations:
-hola
-
-Spanish Example:
-Well, hello, Miss Anchor-liar.:
-Bien, hola, señorita presentadora de mentiras.
-
-
-French Translations:
-bonjour
-
-French Example:
-Well, hello, freedom fighters.:
-Et bien, bonjour combattants de la liberté.
-
-
-Hebrew Translations:
-שלום
-
-Hebrew Example:
-Is "hello" too bland?:
-האם "שלום" יותר מדי מנומס?
-
-
-Japanese Translations:
-こんにちは
-
-Japanese Example:
-The little boy said hello to me.:
-小さな男の子が私にこんにちはと言った。
-
-
-Dutch Translations:
-dag
-
-Dutch Example:
-That was kind of our funny hello.:
-Dat vond we een grappige begroeting.
-
-
-Polish Translations:
-cześć
-
-Polish Example:
-I guess it's... goodbye car insurance, hello city bus.:
-I domyślam się, że to jest... do widzenia ubezpieczenie samochodu, cześć autobus miejski.
-
-
-Portuguese Translations:
-olá
-
-Portuguese Example:
-That was my last kiss hello.:
-Pois eu garanto que aquele foi o meu último beijo de olá.
-
-
-Romanian Translations:
-salut
-
-Romanian Example:
-Well, hello, professor Culbertson.:
-Ei bine, salut, profesor universitar Culbertson.
-
-
-Russian Translations:
-привет
-
-Russian Example:
-Why, hello, there, Admiral.:
-А, Адмирал, привет, что здесь делаешь.
-
-
-Turkish Translations:
-selam
-
-Turkish Example:
-So now little Sabina says hello.:
-Velhasıl minik Sabina size selam söylüyor.
+> python translator.py english all brrrrrrrrrrr
+Sorry, unable to find brrrrrrrrrrr
 """
 
 
